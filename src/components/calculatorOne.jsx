@@ -24,7 +24,8 @@ export default function CalculatorOne({ Total_Experience, Required_MasterExperie
     e.preventDefault();
 
     Validation(dataForm,setActualLevelWarning,setLevelsWarning,setTimeWarning)
-    if (dataForm.time > 0 && dataForm.actualLevel > 0 && dataForm.actualLevel < dataForm.levels) {
+    
+    if (dataForm.time > 0 && dataForm.actualLevel > 0 && parseInt(dataForm.actualLevel) < parseInt(dataForm.levels)) {
       if (dataForm.actualLevel <= 400 && dataForm.levels <= 400) {
         setResult([
           Math.round(
@@ -34,6 +35,7 @@ export default function CalculatorOne({ Total_Experience, Required_MasterExperie
           dataForm.levels,
         ]);
       }
+      
       if (dataForm.levels > 400) {
         setResult([
           Math.round(
@@ -66,7 +68,7 @@ export default function CalculatorOne({ Total_Experience, Required_MasterExperie
   return (
     <div className="bg-slate-100 rounded m-4 shadow-xl">
       <h2 className="font-semibold text-xl text-center mb-4">¿Cuánta experiencia necesito?</h2>
-      <form onSubmit={(e) => timeRequired(e)} className="flex flex-col justify-center items-center">
+      <form onSubmit={(e) => timeRequired(e)} className="form-style">
         <div className="grid grid-cols-2 gap-y-8">
           <label htmlFor="">Nivel actual:</label>
           <div>

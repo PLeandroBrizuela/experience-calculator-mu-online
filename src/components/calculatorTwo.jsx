@@ -24,36 +24,12 @@ export default function CalculatorTwo({ Total_Experience, Required_MasterExperie
 
     Validation(dataForm, setActualLevelWarning, setLevelsWarning, setExperienceGainedWaring);
 
-    let days, hour, minute, second, seconds;
+    let years, months, days, hour, minute, second, seconds;
 
-    if (
-      dataForm.levels <= 400 &&
-      dataForm.actualLevel <= 400 &&
-      dataForm.actualLevel > 0 &&
-      dataForm.levels > 0 &&
-      dataForm.experienceGained > 0
-    ) {
+    if (dataForm.levels <= 400 && dataForm.actualLevel <= 400) {
       seconds = Math.round(
         (Total_Experience[dataForm.levels - 1] - Total_Experience[dataForm.actualLevel - 1]) / dataForm.experienceGained
       );
-
-      days = Math.floor(seconds / 86400);
-      hour = Math.floor((seconds % 86400) / 3600);
-      minute = Math.floor(((seconds % 86400) % 3600) / 60);
-      second = ((seconds % 86400) % 3600) % 60;
-
-      hour = hour.toString().padStart(2, "0");
-      minute = minute.toString().padStart(2, "0");
-      second = second.toString().padStart(2, "0");
-
-      setResult([
-        days === 0
-          ? hour + ":" + minute + ":" + second
-          : days === 1
-          ? days + " Dia " + hour + ":" + minute + ":" + second
-          : days + " Dias " + hour + ":" + minute + ":" + second,
-        dataForm.levels,
-      ]);
     }
     if (dataForm.levels > 400) {
       seconds = Math.round(
@@ -62,48 +38,41 @@ export default function CalculatorTwo({ Total_Experience, Required_MasterExperie
           Total_Experience[dataForm.actualLevel - 1]) /
           dataForm.experienceGained
       );
-
-      days = Math.floor(seconds / 86400);
-      hour = Math.floor((seconds % 86400) / 3600);
-      minute = Math.floor(((seconds % 86400) % 3600) / 60);
-      second = ((seconds % 86400) % 3600) % 60;
-
-      hour = hour.toString().padStart(2, "0");
-      minute = minute.toString().padStart(2, "0");
-      second = second.toString().padStart(2, "0");
-
-      setResult([
-        days === 0
-          ? hour + ":" + minute + ":" + second
-          : days === 1
-          ? days + " Dia " + hour + ":" + minute + ":" + second
-          : days + " Dias " + hour + ":" + minute + ":" + second,
-        dataForm.levels,
-      ]);
     }
     if (dataForm.levels > 400 && dataForm.actualLevel > 400) {
       seconds = Math.round(
         (Required_MasterExperience[dataForm.levels - 401] - Required_MasterExperience[dataForm.actualLevel - 401]) /
           dataForm.experienceGained
       );
+    }
 
-      days = Math.floor(seconds / 86400);
-      hour = Math.floor((seconds % 86400) / 3600);
-      minute = Math.floor(((seconds % 86400) % 3600) / 60);
-      second = ((seconds % 86400) % 3600) % 60;
+    years = Math.floor(seconds / 31536000);
+    months = Math.floor((seconds % 31536000) / 2592000);
+    days = Math.floor(((seconds % 31536000) % 2592000) / 86400);
+    hour = Math.floor((seconds % 86400) / 3600);
+    minute = Math.floor(((seconds % 86400) % 3600) / 60);
+    second = ((seconds % 86400) % 3600) % 60;
 
-      hour = hour.toString().padStart(2, "0");
-      minute = minute.toString().padStart(2, "0");
-      second = second.toString().padStart(2, "0");
+    hour = hour.toString().padStart(2, "0");
+    minute = minute.toString().padStart(2, "0");
+    second = second.toString().padStart(2, "0");
 
+    if (years === 0) {
+      setResult([months + " Mes(es) " + days + " Dia(s) y " + hour + ":" + minute + ":" + second, dataForm.levels]);
+      if (months === 0) {
+        setResult([days + " Dia(s) y " + hour + ":" + minute + ":" + second, dataForm.levels]);
+        if (days === 0) setResult([hour + ":" + minute + ":" + second, dataForm.levels]);
+      }
+    }
+    if (years > 0) {
       setResult([
-        days === 0
-          ? hour + ":" + minute + ":" + second
-          : days === 1
-          ? days + " Dia " + hour + ":" + minute + ":" + second
-          : days + " Dias " + hour + ":" + minute + ":" + second,
+        years + " Año(s) " + months + " Mes(es) " + days + " Dia(s) y " + hour + ":" + minute + ":" + second,
         dataForm.levels,
       ]);
+      if (months === 0) {
+        setResult([years + " Año(s) " + days + " Dia(s) y " + hour + ":" + minute + ":" + second, dataForm.levels]);
+        if (days === 0) setResult([hour + ":" + minute + ":" + second, dataForm.levels]);
+      }
     }
 
     setTimeout(() => {
@@ -116,7 +85,7 @@ export default function CalculatorTwo({ Total_Experience, Required_MasterExperie
   return (
     <div className="bg-slate-100 rounded m-4 shadow-xl">
       <h2 className="font-semibold text-xl text-center mb-4">¿Cuanto tiempo me tardo?</h2>
-      <form action="" onSubmit={(e) => experienceGained(e)} className="flex flex-col justify-center items-center">
+      <form action="" onSubmit={(e) => experienceGained(e)} className="form-style">
         <div className="grid grid-cols-2 gap-y-8">
           <label htmlFor="">Nivel actual:</label>
           <div>

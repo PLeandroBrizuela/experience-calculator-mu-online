@@ -1,8 +1,10 @@
 import CalculatorOne from "./calculatorOne";
 import CalculatorTwo from "./calculatorTwo";
 import CalculatorThree from "./calculatorThree";
+import { useState } from "react";
 
 export function Calculator() {
+  const [calculator, setCalculator] = useState(1);
   const Total_Experience = [
     0, 100, 440, 1080, 2080, 3500, 5400, 7840, 10880, 14580, 19000, 24200, 30240, 37180, 45080, 54000, 64000, 75140,
     87480, 101080, 116000, 132300, 150040, 169280, 190080, 212500, 236600, 262440, 290080, 319580, 351000, 384400,
@@ -189,10 +191,27 @@ export function Calculator() {
   return (
     <div>
       <h2 className="text-center mt-3 mb-4 font-semibold text-xl underline">Calculadora de experiencia Mu Online</h2>
-      <div className="grid grid-cols-2">
-        <CalculatorOne Total_Experience={Total_Experience} Required_MasterExperience={Required_MasterExperience} />
-        <CalculatorTwo Total_Experience={Total_Experience} Required_MasterExperience={Required_MasterExperience} />
-        <CalculatorThree Total_Experience={Total_Experience} Required_MasterExperience={Required_MasterExperience} />
+      <div className="flex justify-center gap-4">
+        <button className="btn-primary" onClick={() => setCalculator(1)}>
+          Calculadora 1
+        </button>
+        <button className="btn-primary" onClick={() => setCalculator(2)}>
+          Calculadora 2
+        </button>
+        <button className="btn-primary" onClick={() => setCalculator(3)}>
+          Calculadora 3
+        </button>
+      </div>
+      <div className="flex flex-col justify-center items-center">
+        {calculator === 1 && (
+          <CalculatorOne Total_Experience={Total_Experience} Required_MasterExperience={Required_MasterExperience} />
+        )}
+        {calculator === 2 && (
+          <CalculatorTwo Total_Experience={Total_Experience} Required_MasterExperience={Required_MasterExperience} />
+        )}
+        {calculator === 3 && (
+          <CalculatorThree Total_Experience={Total_Experience} Required_MasterExperience={Required_MasterExperience} />
+        )}
       </div>
     </div>
   );

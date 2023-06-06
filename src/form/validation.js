@@ -6,7 +6,7 @@ const warningList = {
 };
 
 export default function Validation(dataForm, setFieldOne, setFieldTwo, setFieldThree) {
-  if (dataForm.levels <= dataForm.actualLevel) {
+  if (parseInt(dataForm.levels) <= parseInt(dataForm.actualLevel)) {
     setFieldOne(warningList[2]);
     setFieldTwo(warningList[2]);
   }

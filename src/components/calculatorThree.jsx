@@ -8,6 +8,7 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
     time: "",
   });
   const [Result, setResult] = useState("");
+  const [percentage, setPercentage] = useState("");
   const [actualLevelWarning, setActualLevelWarning] = useState(false);
   const [timeWarning, setTimeWarning] = useState(false);
   const [experienceGainedWaring, setExperienceGainedWaring] = useState(false);
@@ -19,13 +20,10 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
     });
   };
 
-  const [percentage, setPercentage] = useState("");
-
   const calculated = (e) => {
     e.preventDefault();
 
-
-    Validation(dataForm,setActualLevelWarning,setExperienceGainedWaring,setTimeWarning)
+    Validation(dataForm, setActualLevelWarning, setExperienceGainedWaring, setTimeWarning);
 
     let time = dataForm.time * 86400,
       level,
@@ -34,7 +32,7 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
       expNextLevel,
       resultsPercentage;
 
-    if (dataForm.actualLevel > 0 && dataForm.time > 0 && dataForm.experienceGained > 0) {
+    if (dataForm.actualLevel && dataForm.experienceGained && dataForm.time > 0) {
       if (dataForm.actualLevel < 400) {
         level = Total_Experience[dataForm.actualLevel - 1];
 
@@ -63,7 +61,7 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
         }
       }
 
-      if (dataForm.actualLevel > 400) {
+      if (dataForm.actualLevel >= 400) {
         level = Required_MasterExperience[dataForm.actualLevel - 400];
 
         exp = time * dataForm.experienceGained + level;
@@ -77,7 +75,7 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
         setPercentage(resultsPercentage);
       }
     }
-    
+
     setTimeout(() => {
       setActualLevelWarning(false);
       setExperienceGainedWaring(false);
@@ -87,7 +85,7 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
   return (
     <div className="bg-slate-100 rounded m-4 shadow-xl col-span-2">
       <h2 className="font-semibold text-xl text-center mb-4">¿A qué nivel llego?</h2>
-      <form onSubmit={(e) => calculated(e)} className="flex flex-col justify-center items-center">
+      <form onSubmit={(e) => calculated(e)} className="form-style">
         <div className="grid grid-cols-2 gap-y-8">
           <label htmlFor="">Nivel actual:</label>
           <div>
