@@ -66,7 +66,7 @@ export default function CalculatorOne({ Total_Experience, Required_MasterExperie
   };
 
   return (
-    <div className="bg-slate-100 rounded m-4 shadow-xl">
+    <div className="bg-slate-100 rounded m-4 shadow-xl m-4">
       <h2 className="font-semibold text-xl text-center mb-4">¿Cuánta experiencia necesito?</h2>
       <form onSubmit={(e) => timeRequired(e)} className="form-style">
         <div className="grid grid-cols-2 gap-y-8">
@@ -74,7 +74,7 @@ export default function CalculatorOne({ Total_Experience, Required_MasterExperie
           <div>
             <input
               type="text"
-              className={`border-2 rounded ${actualLevelWarning && "border-red-500"}`}
+              className={`border-2 rounded w-40 ${actualLevelWarning && "border-red-500"}`}
               value={dataForm.actualLevel}
               name="actualLevel"
               onChange={(e) => handleChange(e)}
@@ -85,7 +85,7 @@ export default function CalculatorOne({ Total_Experience, Required_MasterExperie
           <div>
             <input
               type="text"
-              className={`border-2 rounded ${levelsWarning && "border-red-500"}`}
+              className={`border-2 rounded w-40 ${levelsWarning && "border-red-500"}`}
               value={dataForm.levels}
               name="levels"
               onChange={(e) => handleChange(e)}
@@ -96,7 +96,7 @@ export default function CalculatorOne({ Total_Experience, Required_MasterExperie
           <div>
             <input
               type="text"
-              className={`border-2 rounded ${timeWarning && "border-red-500"}`}
+              className={`border-2 rounded w-40 ${timeWarning && "border-red-500"}`}
               value={dataForm.time}
               name="time"
               onChange={(e) => handleChange(e)}

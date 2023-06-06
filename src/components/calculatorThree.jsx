@@ -91,7 +91,7 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
           <div>
             <input
               type="text"
-              className={`border-2 rounded ${actualLevelWarning && "border-red-500"}`}
+              className={`border-2 rounded w-40 ${actualLevelWarning && "border-red-500"}`}
               value={dataForm.actualLevel}
               name="actualLevel"
               onChange={(e) => handleChange(e)}
@@ -102,7 +102,7 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
           <div>
             <input
               type="text"
-              className={`border-2 rounded ${experienceGainedWaring && "border-red-500"}`}
+              className={`border-2 rounded w-40 ${experienceGainedWaring && "border-red-500"}`}
               value={dataForm.experienceGained}
               name="experienceGained"
               onChange={(e) => handleChange(e)}
@@ -113,7 +113,7 @@ export default function CalculatorThree({ Total_Experience, Required_MasterExper
           <div>
             <input
               type="text"
-              className={`border-2 rounded ${timeWarning && "border-red-500"}`}
+              className={`border-2 rounded w-40 ${timeWarning && "border-red-500"}`}
               value={dataForm.time}
               name="time"
               onChange={(e) => handleChange(e)}
